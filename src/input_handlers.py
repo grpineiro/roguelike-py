@@ -1,5 +1,3 @@
-import keyword
-from re import A
 from typing import Optional
 from actions import Action, EscapeAction, MovimentAction
 
