@@ -1,5 +1,8 @@
 from os import path
 
+from actions import EscapeAction, MovimentAction
+from input_handlers import EventHandler
+
 import tcod
 
 def main() -> None:
@@ -12,6 +15,8 @@ def main() -> None:
     tileset = tcod.tileset.load_tilesheet(
         path.realpath('assets/dejavu10x10_gs_tc.png'), 32, 8, tcod.tileset.CHARMAP_TCOD
     )
+
+    event_handler = EventHandler()
 
     with tcod.context.new_terminal(
         screen_width,
@@ -28,8 +33,17 @@ def main() -> None:
             context.present(root_console)
 
             for event in tcod.event.wait():
-                if event.type == 'QUIT':
-                    raise SystemExit()
+                action = event_handler.dispatch(event)
+
+                if action is None:
+                  continue
+
+                if isinstance(action, MovimentAction):
+                  player_x += action.dx
+                  player_y += action.dy
+
+                elif isinstance(action, EscapeAction):
+                  raise SystemExit()
 
 if __name__ == '__main__':
     main()
