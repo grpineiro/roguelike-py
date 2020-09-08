@@ -29,8 +29,8 @@ class MovimentAction(Action):
     self.dy = dy
 
   def perform(self, engine: Engine, entity: Entity) -> None:
-    dest_x = entity.x = self.dx
-    dest_y = entity.y = self.dy
+    dest_x = entity.x + self.dx
+    dest_y = entity.y + self.dy
 
     if not engine.game_map.in_bounds(dest_x, dest_y):
       return # Destination is out of bounds.
