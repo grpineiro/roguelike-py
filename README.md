@@ -1,5 +1,5 @@
 # Roguelike-py Game
 
 ## Requirements to development
-  - TCOD
-  - Numpy
+  - TCOD >= 11.13
+  - Numpy >= 1.18
